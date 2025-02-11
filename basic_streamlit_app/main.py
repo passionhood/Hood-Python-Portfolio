@@ -4,7 +4,7 @@ import pandas as pd
 st.cache_data  #cache functions that return data
 
 def load_data(): #loads the dataset
-    return pd.read_csv("/mnt/data/CryptocurrencyData.csv")
+    return pd.read_csv("CryptocurrencyData.csv")
 
 data = load_data()
 
@@ -13,8 +13,10 @@ st.title('Cryptocurrency Data Explorer') #title app
 st.write("Explore various cryptocurrencies and their market data based on name and minimum market capitalization.") ## Description of the app
 
 
-selected_crypto = st.selectbox('Select a cryptocurrency:', data['Name'].unique()) #creates a dropdown to select the cryptocurrency name
+selected_crypto = st.selectbox('Select a Cryptocurrency:', data['Name'].unique()) #creates a dropdown to select the cryptocurrency name
 
+st.write("Here's a table displaying the data:")
+st.dataframe("CryptocurrencyData.csv") 
 
 # Slider to select the minimum market cap
 # Assuming the MarketCap column is numeric and represents the market capitalization in some units
