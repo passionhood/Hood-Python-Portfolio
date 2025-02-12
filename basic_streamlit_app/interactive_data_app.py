@@ -72,17 +72,3 @@ filtered_df = df[df["City"] == city]
 # Display the filtered results with an appropriate heading.
 st.write(f"People in {city}:")
 st.dataframe(filtered_df)  # Show the filtered table
-
-# ------------------------
-# NEXT STEPS & CHALLENGE
-# ------------------------
-
-# Play around with more Streamlit widgets or elements by checking the documentation:
-# https://docs.streamlit.io/develop/api-reference
-# Use the cheat sheet for quick reference:
-# https://cheat-sheet.streamlit.app/
-
-### Challenge:
-# 1️⃣ Modify the dataframe (add new columns or different data).
-# 2️⃣ Add an input box for users to type names and filter results.
-# 3️⃣ Make a simple chart using st.bar_chart().

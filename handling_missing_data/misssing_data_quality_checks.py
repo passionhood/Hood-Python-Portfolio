@@ -5,15 +5,12 @@ import streamlit as st         # Framework for creating interactive web apps
 
 # ================================================================================
 # Missing Data & Data Quality Checks
-#
-# This lecture covers:
 # - **Data Validation:** Checking data types, missing values, and basic consistency.
 # - **Missing Data Handling:** Options to drop or impute missing data.
 # - **Visualization:** Using heatmaps and histograms to understand data distribution.
 # ================================================================================
 st.title("Missing Data & Data Quality Checks")
 st.markdown("""
-This lecture covers:
 - **Data Validation:** Checking data types, missing values, and basic consistency.
 - **Missing Data Handling:** Options to drop or impute missing data.
 - **Visualization:** Using heatmaps and histograms to understand data distribution.
