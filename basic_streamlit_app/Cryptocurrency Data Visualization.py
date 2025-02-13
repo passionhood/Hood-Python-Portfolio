@@ -1,68 +1,83 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
 
-# Load the CSV data
-@st.cache_data #cache functions that returns data
-def load_data():
-    data = pd.read_csv("./data/CryptocurrencyData.csv")
-    return data
+# Load the cryptocurrency data
+csv_path = "data/CryptocurrencyData.csv"
+df = pd.read_csv(csv_path)
 
-df = load_data()
+# Clean column names (strip spaces)
+df.columns = df.columns.str.strip()
 
-st.title("Cryptocurrency Data Explorer")
+# Convert numerical columns to float (removing "$" and ",")
+def clean_currency(value):
+    if isinstance(value, str):
+        # Remove the "$" and "," symbols, and check for invalid values like ' - '
+        value = value.replace("$", "").replace(",", "")
+        # If the value is empty or invalid, return NaN
+        if value == '' or value == ' - ':
+            return float('nan')
+    # Attempt to convert the value to a float, returning NaN if not possible
+    try:
+        return float(value)
+    except ValueError:
+        return float('nan')
 
-# Short description of what the app does
-st.write("""
-This app allows you to explore cryptocurrency data. You can filter the data based on various criteria such as market cap, price, and more.
-""")
+numeric_cols = ["Price", "24h Volume", "Market Cap"]
+for col in numeric_cols:
+    df[col] = df[col].apply(clean_currency)
 
-# Display the sample DataFrame
-st.subheader("Sample Cryptocurrency Data")
+# Streamlit app title
+st.title("📊 Cryptocurrency Dashboard")
+
+# App description
+st.write("This app allows users to explore and filter cryptocurrency data interactively.")
+
+# Display the dataset
+st.subheader("🔍 Sample Data")
 st.write(df.head())
 
 # Interactive filtering options
-st.sidebar.header("Filter Options")
+st.sidebar.header("🎛️ Filter Options")
 
-# Filter by Market Cap
-market_cap_range = st.sidebar.slider(
-    "Select Market Cap Range (in billions)",
-    float(df[" Market Cap "].min() / 1e9),
-    float(df[" Market Cap "].max() / 1e9),
-    (float(df[" Market Cap "].min() / 1e9), float(df[" Market Cap "].max() / 1e9))
-)
+# Dropdown for selecting a cryptocurrency
+crypto_choice = st.sidebar.selectbox("Select a Cryptocurrency:", df["Coin Name"].unique())
+df_filtered = df[df["Coin Name"] == crypto_choice]
 
-# Filter by Price
-price_range = st.sidebar.slider(
-    "Select Price Range",
-    float(df[" Price "].min()),
-    float(df[" Price "].max()),
-    (float(df[" Price "].min()), float(df[" Price "].max()))
-)
+# Numeric filter for Market Cap
+min_cap, max_cap = st.sidebar.slider("Market Cap Range:",
+                                     float(df["Market Cap"].min()),
+                                     float(df["Market Cap"].max()),
+                                     (float(df["Market Cap"].min()), float(df["Market Cap"].max())))
+df_filtered = df_filtered[(df_filtered["Market Cap"] >= min_cap) & (df_filtered["Market Cap"] <= max_cap)]
 
-# Filter by Coin Name
-coin_name = st.sidebar.multiselect(
-    "Select Coin Name",
-    df["Coin Name"].unique()
-)
+# Display the filtered dataset
+st.subheader("📜 Filtered Data")
+st.write(df_filtered)
 
-# Apply filters
-filtered_df = df[
-    (df[" Market Cap "] >= market_cap_range[0] * 1e9) & 
-    (df[" Market Cap "] <= market_cap_range[1] * 1e9) &
-    (df[" Price "] >= price_range[0]) &
-    (df[" Price "] <= price_range[1])
-]
+# --- Visualization Section ---
 
-if coin_name:
-    filtered_df = filtered_df[filtered_df["Coin Name"].isin(coin_name)]
+# 1️⃣ **Bar Chart - Top 10 Cryptos by Market Cap**
+st.subheader("🏆 Top 10 Cryptocurrencies by Market Cap")
+top_10 = df.nlargest(10, "Market Cap")
+fig, ax = plt.subplots()
+ax.barh(top_10["Coin Name"], top_10["Market Cap"], color='skyblue')
+ax.set_xlabel("Market Cap (in billions)")
+ax.set_ylabel("Cryptocurrency")
+ax.set_title("Top 10 Cryptos by Market Cap")
+st.pyplot(fig)
 
-# Display the filtered DataFrame
-st.subheader("Filtered Cryptocurrency Data")
-st.write(filtered_df)
+# 2️⃣ **Line Chart - Price Trend of Selected Crypto (if multiple entries exist)**
+if len(df_filtered) > 1:
+    st.subheader(f"📈 Price Trend for {crypto_choice}")
+    st.line_chart(df_filtered.set_index("Rank")["Price"])
 
-# Additional visualizations (optional)
-st.subheader("Market Cap Distribution")
-st.bar_chart(filtered_df.set_index("Coin Name")[" Market Cap "])
+# 3️⃣ **Pie Chart - Market Cap Distribution**
+st.subheader("📊 Market Cap Distribution of Top 5 Cryptos")
+top_5 = df.nlargest(5, "Market Cap")
+fig, ax = plt.subplots()
+ax.pie(top_5["Market Cap"], labels=top_5["Coin Name"], autopct="%1.1f%%", colors=["gold", "silver", "blue", "red", "green"])
+ax.set_title("Market Cap Share of Top 5 Cryptos")
+st.pyplot(fig)
 
-st.subheader("Price Distribution")
-st.bar_chart(filtered_df.set_index("Coin Name")[" Price "])
+st.write("📌 *Data sourced from a cryptocurrency dataset. *")
