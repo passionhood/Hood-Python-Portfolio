@@ -76,7 +76,7 @@ if len(df_filtered) > 1:
 st.subheader("📊 Market Cap Distribution of Top 5 Cryptos")
 top_5 = df.nlargest(5, "Market Cap")
 fig, ax = plt.subplots()
-ax.pie(top_5["Market Cap"], labels=top_5["Coin Name"], autopct="%1.1f%%", colors=["gold", "silver", "blue", "red", "green"])
+ax.pie(top_5["Market Cap"], labels=top_5["Coin Name"], autopct="%1.1f%%", colors=["gold", "orange", "blue", "red", "green"])
 ax.set_title("Market Cap Share of Top 5 Cryptos")
 st.pyplot(fig)
 
