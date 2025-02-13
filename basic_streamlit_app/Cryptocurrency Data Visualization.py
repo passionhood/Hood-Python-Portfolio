@@ -31,7 +31,7 @@ for col in numeric_cols:
 st.title("📊 Cryptocurrency Dashboard")
 
 # App description
-st.write("This app allows users to explore and filter cryptocurrency data interactively.")
+st.write("This app allows users to explore and filter cryptocurrency data.")
 
 # Display the dataset
 st.subheader("🔍 Sample Data")
