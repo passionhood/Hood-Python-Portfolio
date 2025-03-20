@@ -1,6 +1,7 @@
 # Hood-Python-Portfolio
 This portfolio will house projects for Elements of Computing II during Spring 2025.
 
+
 New Project: Tidy Data & Federal R&D Spending Analysis
 Repository: Tidy Data Project, 
 
