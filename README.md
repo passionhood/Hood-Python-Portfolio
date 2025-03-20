@@ -5,7 +5,7 @@ This portfolio will house projects for Elements of Computing II during Spring 20
 New Project: Tidy Data & Federal R&D Spending Analysis
 Repository: Tidy Data Project, 
 
-I just included a new project in my portfolio! This project is all about cleaning, reshaping, and analyzing federal R&D spending data with Pandas and Tidy Data Principles.
+This project is all about cleaning, reshaping, and analyzing federal R&D spending data with Pandas and Tidy Data Principles.
 
 Project Highlights:
 ✔ Repurposed unstructured financial data into a shape with .melt() and .split().
