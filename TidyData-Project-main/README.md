@@ -46,4 +46,6 @@ Pandas Cheat Sheet, https://www.geeksforgeeks.org/pandas-cheat-sheet/
 Tidy Data Paper, https://vita.had.co.nz/papers/tidy-data.pdf 
 
 Example Visuals
-
+Examples of the plots are attached. 
+[def]: image.png 
+![alt text](image-1.png)
