@@ -4,7 +4,7 @@ This portfolio will house projects for Elements of Computing II during Spring 20
 
 New Project: Tidy Data & Federal R&D Spending Analysis
 
-Repository: Tidy Data Project, 
+Repository: Tidy Data Project,  https://github.com/passionhood/Hood-Python-Portfolio/tree/main/TidyData-Project-main  
 
 This project is all about cleaning, reshaping, and analyzing federal R&D spending data with Pandas and Tidy Data Principles.
 
