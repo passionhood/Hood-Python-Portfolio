@@ -1,0 +1,5 @@
+# Installing the spaCy library
+!pip install spacy
+
+# Installing the small English language model used by spaCy
+!python -m spacy download en_core_web_sm
