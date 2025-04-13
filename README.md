@@ -1,5 +1,5 @@
 ## Streamlit App for Named Entity Recognition (NER)
-View Project Repository - 
+View Project Repository - https://github.com/passionhood/Hood-Python-Portfolio/tree/main/NERStreamlitApp
 
 This real-time interactive web app project employs Streamlit and spaCy to enable users to experiment with Named Entity Recognition (NER) in real-time. Users can input their own text, define rule-based entity labels using spaCy's EntityRuler, and view the entities graphically highlighted with dynamic highlighting.
 
