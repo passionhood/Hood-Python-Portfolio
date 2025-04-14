@@ -48,8 +48,12 @@ if st.session_state.patterns:
 ruler = EntityRuler(nlp, overwrite_ents=True)
 ruler.add_patterns(st.session_state.patterns)
 
-# Insert it into spaCy pipeline before the standard NER
-nlp.add_pipe(ruler, before="ner", name="custom_ruler", config={"overwrite_ents": True})
+# Add the EntityRuler component to the pipeline by name
+nlp.add_pipe("entity_ruler", before="ner")
+
+# Access the added pipe and add custom patterns
+nlp.get_pipe("entity_ruler").add_patterns(st.session_state.patterns)
+# If no patterns are defined, use a default pattern
 
 # Load text from file or user input
 if uploaded_file:
