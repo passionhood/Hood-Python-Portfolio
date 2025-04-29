@@ -27,12 +27,14 @@ pip install streamlit pandas numpy yfinance matplotlib seaborn
 - Unrealized gains or losses (if applicable)
 
 3. Visualizations: 
-- Asset allocation pie chart
-- Portfolio vs. S&P 500 Cumulative Return
-- Correlation heatmap amongst holdings 
+- Toggleable Pie Chart or Bar Chart of asset allocation
+- Cumulative return vs. S&P 500 since 2022
+- Correlation heatmap amongst holdings
 
+4. Export Options 
+Download your portfolio summary as a clean .csv file directly from the app.
 
-4. Available Recommended Exports:
+Available Recommended Files:
 - Downloadable .csv summary of portfolio holdings
    
      including purchase price: https://nd4-my.sharepoint.com/:x:/g/personal/phood_nd_edu/EVoFtlq33cNIoWQQQInbAWEBsIyOXWq6OOn-zuM4Xxtd1w?e=r9zNeL
@@ -45,7 +47,6 @@ pip install streamlit pandas numpy yfinance matplotlib seaborn
 - Beta (vs. S&P 500)
 - Maximum drawdown
 
-
 ## Disclaimer:
 If the 'Purchase Price' is missing for any holdings, unrealized gains and losses will not be calculated.
 As a result, the app will still display full market value and allocation data for those assets.
@@ -55,9 +56,17 @@ Streamlit Documentation - https://docs.streamlit.io/
 
 Yahoo Finance API via yfinance - https://pypi.org/project/yfinance/
 
-Seaborn Documentation - 
+Seaborn Documentation - https://seaborn.pydata.org/ 
 
 ## Visual Examples
 google - how to put imahimsages/pngs in markdown readme/.md 
+
+Allocation Pie Chart Example - 
+
+Allocation Bar Char Example - 
+
+Portfolio Table Example - 
+
+
 
 
