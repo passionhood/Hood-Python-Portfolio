@@ -51,7 +51,7 @@ As a result, the app will still display full market value and allocation data fo
 ## References & Resources
 Streamlit Documentation - https://docs.streamlit.io/ 
 Yahoo Finance API via yfinance - https://pypi.org/project/yfinance/
-Seaborn Documentation
+Seaborn Documentation - 
 
 ## Visual Examples
 
