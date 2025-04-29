@@ -86,7 +86,6 @@ if uploaded_file:
             # --- Pie Chart: Asset Allocation Visualization ---
             st.subheader('Asset Allocation')
             fig1, ax1 = plt.subplots()
-            ax1.pie(portfolio_df['Allocation %'], labels=portfolio_df['Ticker'], autopct='%1.1f%%', startangle=140)
             ax1.pie(
                  portfolio_df['Allocation %'], 
                  labels=portfolio_df['Ticker'], 
