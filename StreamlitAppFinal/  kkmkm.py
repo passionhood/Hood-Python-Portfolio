@@ -7,6 +7,7 @@
 import streamlit as st # For web app framework
 import pandas as pd # For data manipulation
 import numpy as np # For data manipulation
+import spacy # For NLP tasks
 import yfinance as yf # Yahoo Finance API for stock data
 import matplotlib.pyplot as plt # For plotting
 import seaborn as sns # For heatmaps
