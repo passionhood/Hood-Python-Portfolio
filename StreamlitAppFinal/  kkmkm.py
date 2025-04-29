@@ -4,13 +4,13 @@
 # Final Project
 
 # --- Import Necessary Libraries ---
-import streamlit as st  # Web app framework
-import pandas as pd     # Data manipulation
-import numpy as np      # Numerical computations
-import yfinance as yf   # Yahoo Finance API for stock data
-import matplotlib.pyplot as plt  # Plotting
-import seaborn as sns   # Advanced visualization
-from datetime import datetime  # Date handling
+import streamlit as st
+import pandas as pd
+import numpy as np
+import yfinance as yf
+import matplotlib.pyplot as plt
+import seaborn as sns
+from datetime import datetime
 
 # --- Set Default Parameters ---
 RISK_FREE_RATE = 0.03  # Assume 3% risk-free rate for Sharpe Ratio calculations
@@ -121,8 +121,8 @@ if uploaded_file:
             sp500_cumulative = (1 + sp500_returns).cumprod()
 
             fig2, ax2 = plt.subplots(figsize=(12, 6))
-            sns.lineplot(data=cumulative_returns, label='Your Portfolio', ax=ax2)
-            sns.lineplot(data=sp500_cumulative, label='S&P 500', ax=ax2)
+            ax2.plot(cumulative_returns.index, cumulative_returns.values, label='Your Portfolio', linewidth=2)
+            ax2.plot(sp500_cumulative.index, sp500_cumulative.values, label='S&P 500', linewidth=2)
             ax2.set_ylabel('Growth of $1')
             ax2.set_title('Cumulative Return Since 2022')
             ax2.legend()
