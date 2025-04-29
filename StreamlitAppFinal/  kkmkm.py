@@ -58,6 +58,8 @@ if uploaded_file:
 
             # --- Calculate Market Value of Each Holding ---
             portfolio_df['Current Price'] = portfolio_df['Ticker'].map(latest_prices)
+            portfolio_df.dropna(subset=['Current Price'], inplace=True)  # Drop rows with missing prices
+            st.warning("Some tickers were removed because price data was unavailable (e.g., delisted or invalid).")
             portfolio_df['Market Value'] = portfolio_df['Shares'] * portfolio_df['Current Price']
 
             # --- Calculate Allocation % for Each Asset ---
