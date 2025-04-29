@@ -90,14 +90,25 @@ if uploaded_file:
             st.subheader('Asset Allocation')
             fig1, ax1 = plt.subplots(figsize=(10, 6))
             if chart_type == 'Pie Chart':
+                def autopct_format(p):
+                    return f'{p:.1f}%' if p > 3 else ''
+
+                def label_format(label, pct):
+                    return label if pct > 3 else ''
+
+                sizes = portfolio_df['Allocation %']
+                labels = portfolio_df['Ticker']
+                formatted_labels = [label_format(label, pct) for label, pct in zip(labels, sizes)]
+
                 ax1.pie(
-                    portfolio_df['Allocation %'],
-                    labels=portfolio_df['Ticker'],
-                    autopct=lambda p: f'{p:.1f}%' if p > 2 else '',
+                    sizes,
+                    labels=formatted_labels,
+                    autopct=autopct_format,
                     startangle=140,
-                    textprops={'fontsize': 10}
+                    textprops={'fontsize': 9}
                 )
                 ax1.axis('equal')
+                ax1.legend(portfolio_df['Ticker'], title="Tickers", bbox_to_anchor=(1, 0.5), loc="center left", fontsize=9)
             else:
                 sns.barplot(data=portfolio_df.sort_values('Allocation %', ascending=False), x='Ticker', y='Allocation %', palette='pastel', ax=ax1)
                 ax1.set_ylabel('Allocation (%)')
@@ -174,5 +185,3 @@ if uploaded_file:
         st.error(f"An error occurred: {e}")
         st.warning("Please check your CSV file format and try again.")
 else:
-    st.info('👈 Upload a CSV file to get started!')
-
