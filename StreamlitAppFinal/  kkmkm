@@ -1,16 +1,16 @@
 # Portfolio Analyzer Streamlit App
-# Author: [Your Name]
+# Passion Hood
 # Course: Elements of Computing II, Spring 2025
 # Final Project
 
 # --- Import Necessary Libraries ---
-import streamlit as st
-import pandas as pd
-import numpy as np
-import yfinance as yf
-import matplotlib.pyplot as plt
-import seaborn as sns
-from datetime import datetime
+import streamlit as st # For web app framework
+import pandas as pd # For data manipulation
+import numpy as np # For data manipulation
+import yfinance as yf # Yahoo Finance API for stock data
+import matplotlib.pyplot as plt # For plotting
+import seaborn as sns # For heatmaps
+from datetime import datetime # For date handling
 
 # --- Set Default Parameters ---
 RISK_FREE_RATE = 0.03  # Assume a 3% risk-free rate for Sharpe Ratio calculations
@@ -18,14 +18,11 @@ START_DATE = '2022-01-01'  # Fixed start date for data pulling
 END_DATE = datetime.today().strftime('%Y-%m-%d')  # Dynamic end date as today's date
 SP500_TICKER = '^GSPC'  # Yahoo Finance ticker symbol for the S&P 500 index
 
-# --- Streamlit Page Configuration ---
-# Setting up Streamlit app layout and page title
-st.set_page_config(page_title='Portfolio Analyzer', layout='wide')
+st.set_page_config(page_title='Portfolio Analyzer', layout='wide') # Sets page title and layout
 
-# --- Streamlit App Title and Instructions ---
-st.title('📈 Investment Portfolio Analyzer')
-st.write("""
-Upload a CSV file containing the following columns:
+st.title('Investment Portfolio Analyzer') # Provides the app title and instructions for the user 
+st.write(""" 
+Upload a CSV file containing the following columns: 
 - **Ticker** (e.g., AAPL)
 - **Shares** (number of shares owned)
 - **Purchase Price** (optional)
@@ -33,8 +30,7 @@ Upload a CSV file containing the following columns:
 The app will analyze your portfolio's current value, risk, and performance metrics.
 """)
 
-# --- Sidebar: Upload CSV File ---
-st.sidebar.header('Upload Your Portfolio CSV')
+st.sidebar.header('Upload Your Portfolio CSV') # Creates a sidebar header
 uploaded_file = st.sidebar.file_uploader("Choose a CSV file", type=["csv"])
 
 if uploaded_file:
@@ -122,8 +118,23 @@ if uploaded_file:
 
             # --- Portfolio Risk Metrics ---
             st.subheader('Portfolio Risk Metrics')
-            st.write(f"**Portfolio Volatility (Annualized Std Dev)**: {weighted_returns.std() * np.sqrt(252):.2%}")
-            st.write(f"**Portfolio Sharpe Ratio** (Risk-Free Rate 3%): {((weighted_returns.mean() * 252) - RISK_FREE_RATE) / (weighted_returns.std() * np.sqrt(252)):.2f}")
+            volatility = weighted_returns.std() * np.sqrt(252)
+            sharpe = ((weighted_returns.mean() * 252) - RISK_FREE_RATE) / volatility
+            
+            # Calculate Beta
+            aligned = pd.concat([weighted_returns, sp500_returns], axis=1).dropna()
+            aligned.columns = ['Portfolio', 'S&P 500']
+            beta = aligned.cov().iloc[0,1] / aligned['S&P 500'].var()
+
+            # Calculate Maximum Drawdown
+            rolling_max = cumulative_returns.cummax()
+            drawdown = cumulative_returns / rolling_max - 1
+            max_drawdown = drawdown.min()
+
+            st.write(f"**Portfolio Volatility (Annualized Std Dev)**: {volatility:.2%}")
+            st.write(f"**Sharpe Ratio (Risk-Free Rate 3%)**: {sharpe:.2f}")
+            st.write(f"**Beta vs. S&P 500**: {beta:.2f}")
+            st.write(f"**Maximum Drawdown**: {max_drawdown:.2%}")
 
             # --- Correlation Heatmap Between Holdings ---
             st.subheader('Correlation Heatmap')
@@ -141,9 +152,9 @@ if uploaded_file:
                                mime='text/csv')
 
     except Exception as e:
-        # Display Error Message if Any Exception Occurs
-        st.error(f"An error occurred: {e}")
+        st.error(f"An error occurred: {e}") # Display error message
+        st.warning("Please check your CSV file format and try again.") # Displays warning message and asksuser to check the .CSV file format
 
 else:
-    # Default Message Before File Upload
-    st.info('👈 Upload a CSV file to get started!'
+    st.info(' Upload a CSV file to get started!') # Displays the default message before file upload
+
