@@ -4,26 +4,27 @@
 # Final Project
 
 # --- Import Necessary Libraries ---
-import streamlit as st # For web app framework
-import pandas as pd # For data manipulation
-import numpy as np # For data manipulation
-import spacy # For NLP tasks
-import yfinance as yf # Yahoo Finance API for stock data
-import matplotlib.pyplot as plt # For plotting
-import seaborn as sns # For heatmaps
-from datetime import datetime # For date handling
+import streamlit as st  # Web app framework
+import pandas as pd     # Data manipulation
+import numpy as np      # Numerical computations
+import yfinance as yf   # Yahoo Finance API for stock data
+import matplotlib.pyplot as plt  # Plotting
+import seaborn as sns   # Advanced visualization
+from datetime import datetime  # Date handling
 
 # --- Set Default Parameters ---
-RISK_FREE_RATE = 0.03  # Assume a 3% risk-free rate for Sharpe Ratio calculations
-START_DATE = '2022-01-01'  # Fixed start date for data pulling
-END_DATE = datetime.today().strftime('%Y-%m-%d')  # Dynamic end date as today's date
-SP500_TICKER = '^GSPC'  # Yahoo Finance ticker symbol for the S&P 500 index
+RISK_FREE_RATE = 0.03  # Assume 3% risk-free rate for Sharpe Ratio calculations
+START_DATE = '2022-01-01'  # Start pulling data from Jan 2022
+END_DATE = datetime.today().strftime('%Y-%m-%d')  # Today's date
+SP500_TICKER = '^GSPC'  # S&P 500 index ticker
 
-st.set_page_config(page_title='Portfolio Analyzer', layout='wide') # Sets page title and layout
+# --- Streamlit App Config ---
+st.set_page_config(page_title='Portfolio Analyzer', layout='wide')
 
-st.title('Investment Portfolio Analyzer') # Provides the app title and instructions for the user 
-st.write(""" 
-Upload a CSV file containing the following columns: 
+# --- App Title and Instructions ---
+st.title('Investment Portfolio Analyzer')
+st.write("""
+Upload a CSV file containing the following columns:
 - **Ticker** (e.g., AAPL)
 - **Shares** (number of shares owned)
 - **Purchase Price** (optional)
@@ -31,16 +32,18 @@ Upload a CSV file containing the following columns:
 The app will analyze your portfolio's current value, risk, and performance metrics.
 """)
 
-st.sidebar.header('Upload Your Portfolio CSV') # Creates a sidebar header
+# --- Sidebar for File Upload and Chart Selection ---
+st.sidebar.header('Upload Your Portfolio CSV')
 uploaded_file = st.sidebar.file_uploader("Choose a CSV file", type=["csv"])
+chart_type = st.sidebar.radio("Choose Allocation View", ['Pie Chart', 'Bar Chart'])
 
 if uploaded_file:
     try:
         # --- Read and Clean Uploaded CSV ---
         portfolio_df = pd.read_csv(uploaded_file)
-        portfolio_df.columns = portfolio_df.columns.str.strip()  # Remove any leading/trailing spaces in column names
+        portfolio_df.columns = portfolio_df.columns.str.strip()
 
-        # --- Check if Required Columns Exist ---
+        # --- Validate Required Columns ---
         if not {'Ticker', 'Shares'}.issubset(portfolio_df.columns):
             st.error("CSV must include at least 'Ticker' and 'Shares' columns.")
         else:
@@ -48,7 +51,7 @@ if uploaded_file:
             tickers = portfolio_df['Ticker'].tolist()
             data = yf.download(tickers, start=START_DATE, end=END_DATE, group_by='ticker', auto_adjust=True, threads=True)
 
-            # --- Fetch Latest Closing Prices for Each Ticker ---
+            # --- Map Latest Prices to Tickers ---
             latest_prices = {}
             for ticker in tickers:
                 try:
@@ -56,24 +59,24 @@ if uploaded_file:
                 except:
                     st.warning(f"Data for {ticker} not found. Skipping.")
 
-            # --- Calculate Market Value of Each Holding ---
+            # --- Calculate Market Values ---
             portfolio_df['Current Price'] = portfolio_df['Ticker'].map(latest_prices)
-            portfolio_df.dropna(subset=['Current Price'], inplace=True)  # Drop rows with missing prices
-            st.warning("Some tickers were removed because price data was unavailable (e.g., delisted or invalid).")
+            portfolio_df.dropna(subset=['Current Price'], inplace=True)
+            st.warning("Some tickers were removed because price data was unavailable.")
             portfolio_df['Market Value'] = portfolio_df['Shares'] * portfolio_df['Current Price']
 
-            # --- Calculate Allocation % for Each Asset ---
+            # --- Calculate Portfolio Allocation ---
             total_value = portfolio_df['Market Value'].sum()
             portfolio_df['Allocation %'] = (portfolio_df['Market Value'] / total_value) * 100
 
-            # --- Calculate Unrealized Gains/Losses if Purchase Price Provided ---
+            # --- Calculate Unrealized Gains/Losses if Purchase Price is Provided ---
             if 'Purchase Price' in portfolio_df.columns:
                 portfolio_df['Unrealized Gain ($)'] = (portfolio_df['Current Price'] - portfolio_df['Purchase Price']) * portfolio_df['Shares']
                 portfolio_df['Unrealized Gain (%)'] = ((portfolio_df['Current Price'] - portfolio_df['Purchase Price']) / portfolio_df['Purchase Price']) * 100
             else:
-                st.info("\n**Note:** Purchase Price column missing. Unrealized gains/losses will not be displayed.")
+                st.info("**Note:** Purchase Price column missing. Unrealized gains/losses will not be displayed.")
 
-            # --- Display Portfolio Table with Formatted Values ---
+            # --- Display Portfolio Table ---
             st.subheader('Portfolio Overview')
             st.dataframe(portfolio_df.style.format({
                 'Current Price': '${:.2f}',
@@ -83,23 +86,26 @@ if uploaded_file:
                 'Unrealized Gain (%)': '{:.2f}%'
             }))
 
-            # --- Pie Chart: Asset Allocation Visualization ---
+            # --- Asset Allocation Chart (Toggleable) ---
             st.subheader('Asset Allocation')
-            fig1, ax1 = plt.subplots()
-            ax1.pie(
-                 portfolio_df['Allocation %'], 
-                 labels=portfolio_df['Ticker'], 
-                 autopct=lambda p: f'{p:.1f}%' if p > 2 else '',  # hide tiny slices
-                 startangle=140,
-                 textprops={'fontsize': 10}  # shrink font slightly
-            )
-            ax1.axis('equal')  # Ensure pie chart is circular
+            fig1, ax1 = plt.subplots(figsize=(10, 6))
+            if chart_type == 'Pie Chart':
+                ax1.pie(
+                    portfolio_df['Allocation %'],
+                    labels=portfolio_df['Ticker'],
+                    autopct=lambda p: f'{p:.1f}%' if p > 2 else '',
+                    startangle=140,
+                    textprops={'fontsize': 10}
+                )
+                ax1.axis('equal')
+            else:
+                sns.barplot(data=portfolio_df.sort_values('Allocation %', ascending=False), x='Ticker', y='Allocation %', palette='pastel', ax=ax1)
+                ax1.set_ylabel('Allocation (%)')
+                ax1.set_title('Portfolio Allocation by Ticker')
             st.pyplot(fig1)
 
-            # --- Line Plot: Portfolio Performance vs. S&P 500 ---
+            # --- Portfolio vs S&P 500 Performance ---
             st.subheader('Portfolio Performance vs. S&P 500')
-
-            # Calculate Daily Returns for Each Ticker
             portfolio_returns = pd.DataFrame()
             for ticker in tickers:
                 try:
@@ -107,52 +113,56 @@ if uploaded_file:
                 except:
                     continue
 
-            # Calculate Weighted Portfolio Returns
             weighted_returns = (portfolio_returns * (portfolio_df.set_index('Ticker')['Allocation %'] / 100)).sum(axis=1)
             cumulative_returns = (1 + weighted_returns).cumprod()
 
-            # Fetch and Calculate S&P 500 Cumulative Returns
             sp500 = yf.download(SP500_TICKER, start=START_DATE, end=END_DATE, auto_adjust=True)
             sp500_returns = sp500['Close'].pct_change()
             sp500_cumulative = (1 + sp500_returns).cumprod()
 
-            # Plot Portfolio vs S&P 500
-            fig2, ax2 = plt.subplots(figsize=(10, 5))
-            ax2.plot(cumulative_returns, label='Your Portfolio', linewidth=2)
-            ax2.plot(sp500_cumulative, label='S&P 500', linewidth=2)
-            ax2.set_title('Cumulative Return Since 2022')
+            fig2, ax2 = plt.subplots(figsize=(12, 6))
+            sns.lineplot(data=cumulative_returns, label='Your Portfolio', ax=ax2)
+            sns.lineplot(data=sp500_cumulative, label='S&P 500', ax=ax2)
             ax2.set_ylabel('Growth of $1')
+            ax2.set_title('Cumulative Return Since 2022')
             ax2.legend()
             st.pyplot(fig2)
 
             # --- Portfolio Risk Metrics ---
             st.subheader('Portfolio Risk Metrics')
+
+            # Volatility (Annualized Std Dev)
             volatility = weighted_returns.std() * np.sqrt(252)
+
+            # Sharpe Ratio
             sharpe = ((weighted_returns.mean() * 252) - RISK_FREE_RATE) / volatility
-            
-            # Calculate Beta
+
+            # Beta vs. S&P 500
             aligned = pd.concat([weighted_returns, sp500_returns], axis=1).dropna()
             aligned.columns = ['Portfolio', 'S&P 500']
-            beta = aligned.cov().iloc[0,1] / aligned['S&P 500'].var()
+            beta = aligned.cov().iloc[0, 1] / aligned['S&P 500'].var()
 
-            # Calculate Maximum Drawdown
+            # Maximum Drawdown
             rolling_max = cumulative_returns.cummax()
             drawdown = cumulative_returns / rolling_max - 1
             max_drawdown = drawdown.min()
 
-            st.write(f"**Portfolio Volatility (Annualized Std Dev)**: {volatility:.2%}")
-            st.write(f"**Sharpe Ratio (Risk-Free Rate 3%)**: {sharpe:.2f}")
-            st.write(f"**Beta vs. S&P 500**: {beta:.2f}")
-            st.write(f"**Maximum Drawdown**: {max_drawdown:.2%}")
+            # Display Risk Metrics
+            st.markdown(f"""
+            - **Portfolio Volatility (Annualized)**: `{volatility:.2%}`
+            - **Sharpe Ratio (Risk-Free Rate 3%)**: `{sharpe:.2f}`
+            - **Beta (vs. S&P 500)**: `{beta:.2f}`
+            - **Maximum Drawdown**: `{max_drawdown:.2%}`
+            """)
 
-            # --- Correlation Heatmap Between Holdings ---
+            # --- Correlation Heatmap ---
             st.subheader('Correlation Heatmap')
-            fig3, ax3 = plt.subplots(figsize=(8, 6))
-            sns.heatmap(portfolio_returns.corr(), annot=True, cmap='coolwarm', center=0, ax=ax3)
+            fig3, ax3 = plt.subplots(figsize=(12, 10))
+            sns.heatmap(portfolio_returns.corr(), annot=True, fmt='.2f', cmap='coolwarm', center=0, annot_kws={'size': 7}, ax=ax3)
             ax3.set_title('Correlation Between Assets')
             st.pyplot(fig3)
 
-            # --- Downloadable Portfolio Report ---
+            # --- Download Portfolio Report ---
             st.subheader('Download Summary Report')
             report = portfolio_df[['Ticker', 'Shares', 'Current Price', 'Market Value', 'Allocation %']]
             st.download_button(label="Download Portfolio Report (CSV)",
@@ -161,9 +171,8 @@ if uploaded_file:
                                mime='text/csv')
 
     except Exception as e:
-        st.error(f"An error occurred: {e}") # Display error message
-        st.warning("Please check your CSV file format and try again.") # Displays warning message and asksuser to check the .CSV file format
-
+        st.error(f"An error occurred: {e}")
+        st.warning("Please check your CSV file format and try again.")
 else:
-    st.info(' Upload a CSV file to get started!') # Displays the default message before file upload
+    st.info('👈 Upload a CSV file to get started!')
 
