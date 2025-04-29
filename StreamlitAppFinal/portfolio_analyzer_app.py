@@ -184,4 +184,5 @@ if uploaded_file:
     except Exception as e:
         st.error(f"An error occurred: {e}")
         st.warning("Please check your CSV file format and try again.")
-else:
+else: 
+     st.info('👈 Upload a CSV file to get started!')
