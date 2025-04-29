@@ -87,6 +87,13 @@ if uploaded_file:
             st.subheader('Asset Allocation')
             fig1, ax1 = plt.subplots()
             ax1.pie(portfolio_df['Allocation %'], labels=portfolio_df['Ticker'], autopct='%1.1f%%', startangle=140)
+            ax1.pie(
+                 portfolio_df['Allocation %'], 
+                 labels=portfolio_df['Ticker'], 
+                 autopct=lambda p: f'{p:.1f}%' if p > 2 else '',  # hide tiny slices
+                 startangle=140,
+                 textprops={'fontsize': 10}  # shrink font slightly
+            )
             ax1.axis('equal')  # Ensure pie chart is circular
             st.pyplot(fig1)
 
