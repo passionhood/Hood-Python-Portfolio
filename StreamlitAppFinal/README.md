@@ -33,9 +33,11 @@ pip install streamlit pandas numpy yfinance matplotlib seaborn
 
 
 4. Available Recommended Exports:
-- Downloadable .csv summary of portfolio holdings 
+- Downloadable .csv summary of portfolio holdings
+   
      including purchase price: https://nd4-my.sharepoint.com/:x:/g/personal/phood_nd_edu/EVoFtlq33cNIoWQQQInbAWEBsIyOXWq6OOn-zuM4Xxtd1w?e=r9zNeL
-     without purchase pricce: https://nd4-my.sharepoint.com/:x:/g/personal/phood_nd_edu/Efvj1CE5HfpMsPZ6Uypm_FYBqJpKsvDCFl8SKsQZwZsV3g?e=r7KA1f 
+  
+     without purchase price: https://nd4-my.sharepoint.com/:x:/g/personal/phood_nd_edu/Efvj1CE5HfpMsPZ6Uypm_FYBqJpKsvDCFl8SKsQZwZsV3g?e=r7KA1f 
 
 5. Risk Metrics: 
 - Portfolio volatility 
@@ -50,7 +52,9 @@ As a result, the app will still display full market value and allocation data fo
 
 ## References & Resources
 Streamlit Documentation - https://docs.streamlit.io/ 
+
 Yahoo Finance API via yfinance - https://pypi.org/project/yfinance/
+
 Seaborn Documentation - 
 
 ## Visual Examples
