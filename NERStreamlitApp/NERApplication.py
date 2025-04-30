@@ -56,13 +56,13 @@ elif custom_text:
     text = custom_text  # Use typed text
 else:
     # Default sample text
-    text = "Apple's earnings report showed a dividend yield increase. Goldman Sachs is bullish on AAPL."
+    text = "On April 25, 2025, Microsoft announced its Q1 earnings, reporting a net income of $18.3 billion. CEO Satya Nadella emphasized growth in Azure and cloud services. Meanwhile, JPMorgan Chase analysts raised their price target for the stock to $360. In related news, Nvidia's recent GPU launch boosted its share price by 4.5%. The Federal Reserve is expected to hold interest rates steady in the upcoming May meeting, citing inflationary pressures."
 
 # --- NLP Processing ---
 doc = nlp(text)  # Apply NLP pipeline to input text
 
 # --- Display Input Text ---
-st.subheader("📄 Input Text")
+st.subheader("Input Text")
 st.code(text, language="text")
 
 # --- Filter Entities ---
@@ -71,7 +71,7 @@ selected_labels = st.multiselect("Filter entities by label:", unique_labels, def
 filtered_ents = [ent for ent in doc.ents if ent.label_ in selected_labels]  # Apply filter
 
 # --- Named Entities Display ---
-st.subheader("🔍 Named Entities")
+st.subheader("Named Entities")
 if filtered_ents:
     for ent in filtered_ents:
         st.markdown(f"- **{ent.text}** — *{ent.label_}*")  # Show entity and label
@@ -79,13 +79,13 @@ else:
     st.write("No named entities found for the selected labels.")
 
 # --- Entity Frequency Chart ---
-st.subheader("📊 Entity Frequency")
+st.subheader("Entity Frequency")
 ent_counts = Counter([ent.label_ for ent in filtered_ents])  # Count each entity label
 if ent_counts:
     st.bar_chart(pd.Series(ent_counts))  # Display as bar chart
 
 # --- Entity Visualization ---
-st.subheader("🖼️ Entity Visualization")
+st.subheader("Entity Visualization")
 html = displacy.render(doc, style="ent", jupyter=False)  # Create HTML visualization
 st.components.v1.html(html, scrolling=True, height=400)  # Render inside app
 
