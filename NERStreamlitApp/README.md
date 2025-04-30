@@ -6,7 +6,7 @@ This interactive app allows users to explore and customize Named Entity Recognit
 
 ##  Features
 - Upload `.txt` files or directly enter text
-- Add custom entity labels and rules (e.g., "PRODUCT: MFST")
+- Add custom entity labels and rules (e.g., "PRODUCT: MFST, interest rates")
 - Visualize extracted named entities using spaCy's DisplaCy
 - Download your rules as a JSON pattern file
 
