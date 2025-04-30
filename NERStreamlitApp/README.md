@@ -19,6 +19,11 @@ This app enhances that by allowing **custom labels and rules** using spaCy's `En
 
 ---
 
+## Visuals 
+![NER App Interface](images/NER_App_Interface.png)
+
+--- 
+
 ## Requirements
 
 ```bash

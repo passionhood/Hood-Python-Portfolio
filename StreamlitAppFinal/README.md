@@ -6,6 +6,8 @@ The app fetches live stock prices, computes market values, tracks cumulative ret
 
 This project was developed as the final project for **Elements of Computing II (Spring 2025)**.
 
+---
+
 ## How to Set Up and Run
 
 1. Clone this repository or download the folder locally.
@@ -14,6 +16,8 @@ This project was developed as the final project for **Elements of Computing II (
  ``bash
 pip install streamlit pandas numpy yfinance matplotlib seaborn
 4. Launch the app locally using the "streamlit run app.py" command 
+
+--- 
 
 ## App Features  
 1. Upload a CSV containing:
@@ -47,9 +51,13 @@ Available Recommended Files:
 - Beta (vs. S&P 500)
 - Maximum drawdown
 
+---
+
 ## Disclaimer:
 If the 'Purchase Price' is missing for any holdings, unrealized gains and losses will not be calculated.
 As a result, the app will still display full market value and allocation data for those assets.
+
+---
 
 ## References & Resources
 Streamlit Documentation - https://docs.streamlit.io/ 
@@ -57,6 +65,8 @@ Streamlit Documentation - https://docs.streamlit.io/
 Yahoo Finance API via yfinance - https://pypi.org/project/yfinance/
 
 Seaborn Documentation - https://seaborn.pydata.org/ 
+
+---
 
 ## Visual Examples
 Portfolio Overview Example:
