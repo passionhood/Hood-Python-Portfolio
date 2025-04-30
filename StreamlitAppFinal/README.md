@@ -59,14 +59,20 @@ Yahoo Finance API via yfinance - https://pypi.org/project/yfinance/
 Seaborn Documentation - https://seaborn.pydata.org/ 
 
 ## Visual Examples
-google - how to put imahimsages/pngs in markdown readme/.md 
+Portfolio Overview Example:
+![Portfolio Overview Example](images/Portfolio%20Overview.png) 
 
-Allocation Pie Chart Example - 
+Allocation Pie Chart Example: 
+![Allocation Pie Chart Example](images/Allocation_Pie_Chart_Example.png)
 
-Allocation Bar Char Example - 
+Cumulative Return vs. S&P 500 Since 2022 Example: 
+![Cumulative Return vs. S&P 500 Since 2022 Example](images/Cumulative_Return_vs._S&P.png)
 
-Portfolio Table Example - 
+Allocation Bar Chart Example: 
+![Allocation Bar Chart Example](images/Allocation_Bar_Chart_Example.png)
 
+Portfolio Table Example: 
+![Portfolio Table Example](images/Portfolio_Table_Example.png)
 
-
-
+Portfolio Summary Export Example: 
+![Portfolio Summary Export Example](images/Portfolio_Summary_Export_Example.png)
