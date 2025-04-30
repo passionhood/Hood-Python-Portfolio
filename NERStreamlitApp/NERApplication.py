@@ -25,8 +25,8 @@ custom_text = st.text_area("Or type/paste your text here:", height=150)  # Manua
 
 # Inputs for defining custom entity patterns
 st.sidebar.subheader("🔧 Define Custom Entities")
-label = st.sidebar.text_input("Entity Label (e.g., PRODUCT, ORG, TICKER)")
-pattern = st.sidebar.text_input("Entity Pattern (e.g., 'iPhone')")
+label = st.sidebar.text_input("Entity Label (e.g., TICKER, ORG, PRODUCT)")
+pattern = st.sidebar.text_input("Entity Pattern (e.g., 'MSFT')")
 
 # Initialize session state to store patterns
 if "patterns" not in st.session_state:
