@@ -6,7 +6,7 @@ This interactive app allows users to explore and customize Named Entity Recognit
 
 ##  Features
 - Upload `.txt` files or directly enter text
-- Add custom entity labels and rules (e.g., "PRODUCT: iPhone")
+- Add custom entity labels and rules (e.g., "PRODUCT: MFST")
 - Visualize extracted named entities using spaCy's DisplaCy
 - Download your rules as a JSON pattern file
 
@@ -21,6 +21,10 @@ This app enhances that by allowing **custom labels and rules** using spaCy's `En
 
 ## Visuals 
 ![NER App Interface](images/NER_App_Interface.png)
+
+![Entity Visualization](images/Entity_Visualization.png)
+
+![Entity Frequency Bar Chart](images/Entity_Frequency_Bar_Chart.png)
 
 --- 
 
