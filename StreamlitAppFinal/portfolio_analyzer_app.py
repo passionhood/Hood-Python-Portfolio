@@ -1,6 +1,6 @@
 # Passion Hood
-# Course: Elements of Computing II, Spring 2025
-# Final Project: # Portfolio Analyzer Streamlit App
+# CSE 10102: Elements of Computing II, Spring 2025
+# Final Project: Portfolio Analyzer Streamlit App
 
 # --- Import Necessary Libraries ---
 import streamlit as st  # Streamlit for web UI

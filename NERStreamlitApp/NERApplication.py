@@ -1,3 +1,7 @@
+# Passion Hood
+# CSE 10102: Elements of Computing II, Spring 2025
+# NER Application: Named Entity Recognition (NER)Tool
+
 import streamlit as st
 import spacy
 from spacy.pipeline import EntityRuler
