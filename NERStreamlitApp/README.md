@@ -23,3 +23,5 @@ This app enhances that by allowing **custom labels and rules** using spaCy's `En
 
 ```bash
 pip install -r requirements.txt
+
+## Visuals
