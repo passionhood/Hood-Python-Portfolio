@@ -59,33 +59,6 @@ This NER application is ideal for finance, journalism, academic research, or any
 
 ---
 
-## Setup Instructions
-
-### Clone the Repository
-
-```bash
-git clone https://github.com/yourusername/ner-streamlit-app.git
-cd ner-streamlit-app
-```
-
-### Install Requirements
-
-Make sure you have Python 3.7+ and run:
-
-```bash
-pip install -r requirements.txt
-```
-
-### Run the App
-
-```bash
-streamlit run app.py
-```
-
-The app will open in your browser at `http://localhost:8501`
-
----
-
 
 ## References & Resources
 
