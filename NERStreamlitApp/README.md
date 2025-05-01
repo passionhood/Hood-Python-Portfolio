@@ -15,13 +15,12 @@ This app enhances NER by allowing users to:
 - Export data for further analysis
 
 This NER application is ideal for finance, journalism, academic research, or anyone curious regarding NER workflows.
-=======
+
 ##  Features
 - Upload `.txt` files or directly enter text
 - Add custom entity labels and rules (e.g., "PRODUCT: MFST, interest rates")
 - Visualize extracted named entities using spaCy's DisplaCy
 - Download your rules as a JSON pattern file
->>>>>>> ffd12b3fb6ffb67709c23c9ffeb6dd798bef924c
 
 ---
 
@@ -39,8 +38,8 @@ This NER application is ideal for finance, journalism, academic research, or any
 ### Example Pattern
 
 ```json
-{"label": "PRODUCT", "pattern": "ChatGPT"}
-{"label": "TICKER", "pattern": "MSFT"}
+{"label": "TICKER", "pattern": "MFST"}
+{"label": "FIN_TERM", "pattern": "interest rates"}
 ```
 
 ---
