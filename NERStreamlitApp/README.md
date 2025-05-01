@@ -2,6 +2,8 @@
 
 This interactive web app lets users explore and customize **Named Entity Recognition (NER)** using [spaCy](https://spacy.io/) and [Streamlit](https://streamlit.io/). Built for experimentation and education, it supports rule-based entity recognition through spaCy's `EntityRuler` and interactive visualizations.
 
+Access the live app here: 🔗 (https://hood-python-portfolio-chfnvfg4lpz5zora763kvf.streamlit.app/)
+
 ---
 
 ## Project Overview
@@ -84,12 +86,6 @@ The app will open in your browser at `http://localhost:8501`
 
 ---
 
-## Live Demo
-
-If deployed on platforms like Streamlit Cloud or Hugging Face Spaces, include a link here:  
-[🔗 View Deployed App](https://hood-python-portfolio-chfnvfg4lpz5zora763kvf.streamlit.app/)
-
----
 
 ## References & Resources
 
