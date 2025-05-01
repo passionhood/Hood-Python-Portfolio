@@ -4,11 +4,11 @@ Welcome to my Python project portfolio! This repository houses a collection of h
 
 ---
 
-## 🔗 Featured Streamlit Applications
+## Featured Streamlit Applications
 
 ### 📈 [Investment Portfolio Analyzer (StreamlitAppFinal)](https://hood-python-portfolio-gakbykrqbswuofpa7gnzef.streamlit.app/)
 
-> **Live App**: *Coming soon*
+🔗 [Live App](https://hood-python-portfolio-gakbykrqbswuofpa7gnzef.streamlit.app/)
 
 This app allows users to upload a CSV file of their current stock holdings and receive a detailed, interactive portfolio analysis. It calculates:
 - **Portfolio returns**, **volatility**, and **Sharpe Ratio**
