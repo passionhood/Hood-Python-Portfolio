@@ -4,17 +4,25 @@ This interactive web app lets users explore and customize **Named Entity Recogni
 
 ---
 
+<<<<<<< HEAD
 ## Project Overview
 
 **NER** is a Natural Language Processing (NLP) task that automatically identifies and classifies named entities—such as people, organizations, locations, or dates—in text.  
 This app enhances NER by allowing users to:
 
 - Upload their own text or enter it manually
-- Add **custom entities and rules** (e.g., tagging a product name or a company ticker)
+- Add **custom entities and rules** (e.g., "PRODUCT: MFST, interest rates")
 - Visualize results using spaCy’s DisplaCy
 - Export data for further analysis
 
 This NER application is ideal for finance, journalism, academic research, or anyone curious regarding NER workflows.
+=======
+##  Features
+- Upload `.txt` files or directly enter text
+- Add custom entity labels and rules (e.g., "PRODUCT: MFST, interest rates")
+- Visualize extracted named entities using spaCy's DisplaCy
+- Download your rules as a JSON pattern file
+>>>>>>> ffd12b3fb6ffb67709c23c9ffeb6dd798bef924c
 
 ---
 
