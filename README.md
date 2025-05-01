@@ -6,7 +6,7 @@ Welcome to my Python project portfolio! This repository houses a collection of h
 
 ## Featured Streamlit Applications
 
-### 📈 [Investment Portfolio Analyzer (StreamlitAppFinal)](https://hood-python-portfolio-gakbykrqbswuofpa7gnzef.streamlit.app/)
+### 📈 [Investment Portfolio Analyzer](https://hood-python-portfolio-gakbykrqbswuofpa7gnzef.streamlit.app/)
 
 🔗 [Live App](https://hood-python-portfolio-gakbykrqbswuofpa7gnzef.streamlit.app/)
 
