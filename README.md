@@ -20,7 +20,7 @@ This project demonstrates my ability to work with financial data and develop pro
 
 ---
 
-### [NER Streamlit App](https://hood-python-portfolio-chfnvfg4lpz5zora763kvf.streamlit.app/)  
+### 🧠 [NER Streamlit App](https://hood-python-portfolio-chfnvfg4lpz5zora763kvf.streamlit.app/)  
 🔗 [Live App](https://hood-python-portfolio-chfnvfg4lpz5zora763kvf.streamlit.app/)
 
 An interactive NLP application that lets users:
