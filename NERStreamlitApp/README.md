@@ -66,6 +66,15 @@ The app will open in your browser at `http://localhost:8501`
 
 ---
 
+## References & Resources
+
+- [spaCy Documentation](https://spacy.io/usage)
+- [spaCy EntityRuler](https://spacy.io/api/entityruler)
+- [Streamlit Documentation](https://docs.streamlit.io/)
+- [DisplaCy Visualizer](https://spacy.io/usage/visualizers#displacy-ent)
+
+---
+
 ## Visual Examples
 
 ![NER App Interface](images/NER_App_Interface.png)  
@@ -78,27 +87,3 @@ The app will open in your browser at `http://localhost:8501`
 *Interactive bar chart showing entity frequency*
 
 ---
-
-
-## References & Resources
-
-- [spaCy Documentation](https://spacy.io/usage)
-- [spaCy EntityRuler](https://spacy.io/api/entityruler)
-- [Streamlit Documentation](https://docs.streamlit.io/)
-- [DisplaCy Visualizer](https://spacy.io/usage/visualizers#displacy-ent)
-
----
-
-## Requirements
-
-```bash
-streamlit
-spacy
-pandas
-```
-
-Also install the spaCy English model:
-
-```bash
-python -m spacy download en_core_web_sm
-```
