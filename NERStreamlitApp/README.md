@@ -18,11 +18,31 @@ This app enhances NER by allowing users to:
 
 This NER application is ideal for finance, journalism, academic research, or anyone curious regarding NER workflows.
 
-##  Features
-- Upload `.txt` files or directly enter text
-- Add custom entity labels and rules (e.g., "PRODUCT: MFST, interest rates")
-- Visualize extracted named entities using spaCy's DisplaCy
-- Download your rules as a JSON pattern file
+--- 
+## Setup Instructions
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/ner-streamlit-app.git
+cd ner-streamlit-app
+```
+
+### Install Requirements
+
+Make sure you have Python 3.7+ and run:
+
+```bash
+pip install -r requirements.txt
+```
+
+### Run the App
+
+```bash
+streamlit run app.py
+```
+
+The app will open in your browser at `http://localhost:8501`
 
 ---
 
