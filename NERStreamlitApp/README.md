@@ -6,7 +6,7 @@ This interactive web app lets users explore and customize **Named Entity Recogni
 
 ## Project Overview
 
-**NER** is a Natural Language Processing (NLP) task that automatically identifies and classifies named entities—such as people, organizations, locations, or dates—in text.  
+**NER** is a Natural Language Processing (NLP) task that automatically identifies and classifies named entities—such as people, organizations, locations, or dates, in text.  
 This app enhances NER by allowing users to:
 
 - Upload their own text or enter it manually
@@ -87,7 +87,7 @@ The app will open in your browser at `http://localhost:8501`
 ## Live Demo
 
 If deployed on platforms like Streamlit Cloud or Hugging Face Spaces, include a link here:  
-[🔗 View Deployed App](https://your-deployed-app-link)
+[🔗 View Deployed App](https://hood-python-portfolio-chfnvfg4lpz5zora763kvf.streamlit.app/)
 
 ---
 
