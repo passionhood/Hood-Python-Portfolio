@@ -6,6 +6,8 @@ The app fetches live stock prices, computes market values, tracks cumulative ret
 
 This project was developed as the final project for **Elements of Computing II (Spring 2025)**.
 
+Access the live app here: 🔗 (https://hood-python-portfolio-gakbykrqbswuofpa7gnzef.streamlit.app/)
+
 ---
 
 ## How to Set Up and Run
