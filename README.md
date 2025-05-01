@@ -1,4 +1,4 @@
-# 📂 Hood Python Portfolio
+# Hood Python Portfolio
 
 Welcome to my Python project portfolio! This repository houses a collection of hands-on, interdisciplinary projects that showcase my skills in **data science**, **finance**, **natural language processing**, and **interactive app development**. Each project emphasizes real-world problem-solving through clean code, effective data handling, and meaningful user interaction.
 
@@ -6,7 +6,7 @@ Welcome to my Python project portfolio! This repository houses a collection of h
 
 ## 🔗 Featured Streamlit Applications
 
-### 📈 [Investment Portfolio Analyzer (StreamlitAppFinal)](https://github.com/passionhood/Hood-Python-Portfolio/tree/main/PortfolioAnalyzer)
+### 📈 [Investment Portfolio Analyzer (StreamlitAppFinal)](https://hood-python-portfolio-gakbykrqbswuofpa7gnzef.streamlit.app/)
 
 > **Live App**: *Coming soon*
 
@@ -20,7 +20,7 @@ This project demonstrates my ability to work with financial data and develop pro
 
 ---
 
-### 🧠 [NER Streamlit App](https://github.com/passionhood/Hood-Python-Portfolio/tree/main/NERStreamlitApp)  
+### [NER Streamlit App](https://hood-python-portfolio-chfnvfg4lpz5zora763kvf.streamlit.app/)  
 🔗 [Live App](https://hood-python-portfolio-chfnvfg4lpz5zora763kvf.streamlit.app/)
 
 An interactive NLP application that lets users:
