@@ -4,7 +4,6 @@ This interactive web app lets users explore and customize **Named Entity Recogni
 
 ---
 
-<<<<<<< HEAD
 ## Project Overview
 
 **NER** is a Natural Language Processing (NLP) task that automatically identifies and classifies named entities—such as people, organizations, locations, or dates—in text.  
