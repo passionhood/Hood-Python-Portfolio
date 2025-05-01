@@ -1,34 +1,109 @@
 # Named Entity Recognition (NER) Streamlit App
 
-This interactive app allows users to explore and customize Named Entity Recognition using spaCy and Streamlit. Built with a clean interface and rule-based pattern matching, it's perfect for learning or demoing custom NER pipelines.
+This interactive web app lets users explore and customize **Named Entity Recognition (NER)** using [spaCy](https://spacy.io/) and [Streamlit](https://streamlit.io/). Built for experimentation and education, it supports rule-based entity recognition through spaCy's `EntityRuler` and interactive visualizations.
 
 ---
 
-##  Features
-- Upload `.txt` files or directly enter text
-- Add custom entity labels and rules (e.g., "PRODUCT: MFST")
-- Visualize extracted named entities using spaCy's DisplaCy
-- Download your rules as a JSON pattern file
+## Project Overview
+
+**NER** is a Natural Language Processing (NLP) task that automatically identifies and classifies named entities—such as people, organizations, locations, or dates—in text.  
+This app enhances NER by allowing users to:
+
+- Upload their own text or enter it manually
+- Add **custom entities and rules** (e.g., tagging a product name or a company ticker)
+- Visualize results using spaCy’s DisplaCy
+- Export data for further analysis
+
+This NER application is ideal for finance, journalism, academic research, or anyone curious regarding NER workflows.
 
 ---
 
-## About Named Entity Recognition (NER)
+## App Features
 
-NER is a sub-task of information extraction that seeks to locate and classify named entities in text into predefined categories such as PERSON, ORGANIZATION, LOCATION, etc.  
-This app enhances that by allowing **custom labels and rules** using spaCy's `EntityRuler`.
+- **Text Input**: Upload `.txt` files or type/paste text directly
+- **Add Custom Entity Rules**: Define entity `label` and `pattern` using spaCy-compatible syntax
+- **Entity Filtering**: Select which entity types to display (e.g., only `ORG`, `DATE`)
+- **Frequency Chart**: View entity distribution with an interactive bar chart
+- **Entity Visualization**: See highlighted entities using spaCy’s DisplaCy
+- **Export Options**:  
+   - Download extracted entities as CSV  
+   - Export your custom rules as a JSON pattern file
+
+### Example Pattern
+
+```json
+{"label": "PRODUCT", "pattern": "ChatGPT"}
+{"label": "TICKER", "pattern": "MSFT"}
+```
 
 ---
 
-## Visuals 
-![NER App Interface](images/NER_App_Interface.png)
+## Visual Examples
 
-![Entity Visualization](images/Entity_Visualization.png)
+![NER App Interface](images/NER_App_Interface.png)  
+*Main interface with text input and settings sidebar*
 
-![Entity Frequency Bar Chart](images/Entity_Frequency_Bar_Chart.png)
+![Entity Visualization](images/Entity_Visualization.png)  
+*DisplaCy rendering of recognized entities*
 
---- 
+![Entity Frequency Bar Chart](images/Entity_Frequency_Bar_Chart.png)  
+*Interactive bar chart showing entity frequency*
+
+---
+
+## Setup Instructions
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/ner-streamlit-app.git
+cd ner-streamlit-app
+```
+
+### Install Requirements
+
+Make sure you have Python 3.7+ and run:
+
+```bash
+pip install -r requirements.txt
+```
+
+### Run the App
+
+```bash
+streamlit run app.py
+```
+
+The app will open in your browser at `http://localhost:8501`
+
+---
+
+## Live Demo
+
+If deployed on platforms like Streamlit Cloud or Hugging Face Spaces, include a link here:  
+[🔗 View Deployed App](https://your-deployed-app-link)
+
+---
+
+## References & Resources
+
+- [spaCy Documentation](https://spacy.io/usage)
+- [spaCy EntityRuler](https://spacy.io/api/entityruler)
+- [Streamlit Documentation](https://docs.streamlit.io/)
+- [DisplaCy Visualizer](https://spacy.io/usage/visualizers#displacy-ent)
+
+---
 
 ## Requirements
 
 ```bash
-pip install -r requirements.txt
+streamlit
+spacy
+pandas
+```
+
+Also install the spaCy English model:
+
+```bash
+python -m spacy download en_core_web_sm
+```
