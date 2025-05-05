@@ -48,4 +48,95 @@ Tidy Data Paper, https://vita.had.co.nz/papers/tidy-data.pdf
 Example Visuals
 Examples of the plots are attached. 
 [def]: image.png 
-![alt text](image-1.png)
+![alt text](image-1.png) 
+
+
+# Tidy Data Project – U.S. Federal R&D Budget Analysis
+
+This project demonstrates the transformation and analysis of messy financial data using the principles of **Tidy Data**, as outlined by Hadley Wickham. The dataset includes multi-year U.S. federal R&D spending across various government departments. By reshaping and cleaning the data using Python libraries, we produce visual insights that are easier to interpret and analyze.
+
+---
+
+## Project Overview
+
+Tidy data refers to a standardized way of organizing datasets where:
+- Each variable forms a column
+- Each observation forms a row
+- Each type of observational unit forms a table
+
+This project applies these principles to transform a wide-format dataset into a long, tidy format. We then use visualizations to uncover trends in federal R&D spending over time.
+
+---
+
+## Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/passionhood/Hood-Python-Portfolio.git
+cd Hood-Python-Portfolio/TidyData-Project-main
+```
+
+### 2. Install Required Dependencies
+
+Make sure Python 3.7+ is installed, then run:
+
+```bash
+pip install pandas matplotlib seaborn jupyterlab
+```
+
+### 3. Launch the Notebook
+
+```bash
+jupyter lab
+```
+
+Open and run the notebook file: `TidyData_Project_Notebook.ipynb`
+
+---
+
+## Dataset Description
+
+- **Source**: U.S. federal R&D budget data (publicly available dataset used for educational purposes)
+- **Structure**: Initially in wide format, with separate columns for each year’s spending per department
+- **Preprocessing**:
+  - Used `.melt()` to convert wide format into long format
+  - Cleaned department labels and parsed numeric columns
+  - Grouped and summarized spending by department and fiscal year
+
+---
+
+## Key Features & Output
+
+- **Data Cleaning**: Removal of null values, standardization of labels
+- **Transformation**: Used Tidy Data principles to restructure dataset
+- **Visual Insights**:
+  - Line plot: total R&D spending by year
+  - Bar chart: department-level budget comparisons
+  - Optional filters for department and year
+
+---
+
+## Visual Examples
+
+> _Note: Screenshots should be saved to the `/images` folder in this repo for full display._
+
+**Line Chart – Total Spending Over Time**  
+![Line Chart](images/Spending_Trend_Line_Chart.png)
+
+**Bar Chart – Spending by Department**  
+![Bar Chart](images/Top_Agencies_Bar_Chart.png)
+
+---
+
+## References
+
+- [Hadley Wickham: Tidy Data Paper (PDF)](https://vita.had.co.nz/papers/tidy-data.pdf)  
+- [RStudio Tidyverse Cheat Sheet](https://github.com/rstudio/cheatsheets/blob/main/data-import.pdf)  
+- [Pandas Documentation](https://pandas.pydata.org/docs/)  
+- [Seaborn Documentation](https://seaborn.pydata.org/)  
+- [Matplotlib Documentation](https://matplotlib.org/)
+
+---
+
+
