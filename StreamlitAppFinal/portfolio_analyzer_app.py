@@ -51,11 +51,11 @@ if uploaded_file:
             # --- Download Stock Data ---
             data = yf.download(tickers, start=START_DATE, end=END_DATE, group_by='ticker', auto_adjust=True, threads=True)
 
-            # --- Fetch Latest Closing Prices ---
+            # --- Fetch Latest Closing Prices from multi-index dataframe ---
             latest_prices = {}
             for ticker in tickers:
                 try:
-                    latest_prices[ticker] = data[ticker]['Close'][-1]  # Latest close
+                    latest_prices[ticker] = data['Close'][ticker].dropna().iloc[-1]
                 except:
                     st.warning(f"Data for {ticker} not found. Skipping.")
 
