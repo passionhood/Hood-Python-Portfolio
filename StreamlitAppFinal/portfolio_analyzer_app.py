@@ -68,9 +68,13 @@ if uploaded_file:
             for ticker in tickers:
                 col_name = f"{ticker}_Close"
                 if col_name in data.columns:
-                    latest_prices[ticker] = data[col_name].dropna().iloc[-1]
+                    series = data[col_name].dropna()
+                    if not series.empty:
+                        latest_prices[ticker] = series.iloc[-1]
+                    else:
+                        st.warning(f"No valid price data for {ticker}. Skipping.")
                 else:
-                    st.warning(f"Data for {ticker} not found. Skipping.")
+                    st.warning(f"Column {col_name} not found in data. Skipping.")
 
             # --- Calculate Current Price and Market Value ---
             portfolio_df['Current Price'] = portfolio_df['Ticker'].map(latest_prices)
@@ -105,6 +109,7 @@ if uploaded_file:
 
 else:
     st.info('👈 Upload a CSV file to get started!')
+
 
 import yfinance as yf
 print(yf.download('AAPL', period='5d'))
