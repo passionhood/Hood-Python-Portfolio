@@ -62,7 +62,7 @@ if uploaded_file:
             latest_prices = {}
             for ticker in tickers:
                 try:
-                    latest_prices[ticker] = data['Close'][ticker].dropna().iloc[-1]
+                    latest_prices[ticker] = data.loc[:, ('Close', ticker)].dropna().iloc[-1]
                 except:
                     st.warning(f"Data for {ticker} not found. Skipping.")
 
@@ -199,3 +199,8 @@ if uploaded_file:
 
 else:
     st.info('👈 Upload a CSV file to get started!')
+
+
+
+import yfinance as yf
+print(yf.download('AAPL', period='5d'))
