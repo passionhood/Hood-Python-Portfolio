@@ -33,7 +33,7 @@ We'll compute allocations, performance, and risk metrics.
 
 # --- Example Portfolio Downloads ---
 with st.sidebar.expander("Need a sample file?"):
-    st.markdown("Download ready-to-use example portfolios:")
+    st.markdown("Download ready-to-use example portfolios:")  # Provides the user with example portfolios
     st.markdown("🔹 [With Purchase Price](https://nd4-my.sharepoint.com/:x:/g/personal/phood_nd_edu/EVoFtlq33cNIoWQQQInbAWEBsIyOXWq6OOn-zuM4Xxtd1w?e=r9zNeL)")
     st.markdown("🔹 [Without Purchase Price](https://nd4-my.sharepoint.com/:x:/g/personal/phood_nd_edu/Efvj1CE5HfpMsPZ6Uypm_FYBqJpKsvDCFl8SKsQZwZsV3g?e=r7KA1f)")
     st.caption("Use these to test features like gain/loss calculations and chart visualizations.")
@@ -103,13 +103,99 @@ if uploaded_file:
                 'Unrealized Gain (%)': '{:.2f}%'
             }))
 
+            # --- Allocation Visualization (Pie or Bar Chart) ---
+            st.subheader('Asset Allocation')
+            fig1, ax1 = plt.subplots(figsize=(10, 6))
+
+            if chart_type == 'Pie Chart':
+                def autopct_format(p):
+                    return f'{p:.1f}%' if p > 3 else ''
+
+                def label_format(label, pct):
+                    return label if pct > 3 else ''
+
+                sizes = portfolio_df['Allocation %']
+                labels = portfolio_df['Ticker']
+                formatted_labels = [label_format(label, pct) for label, pct in zip(labels, sizes)]
+
+                ax1.pie(sizes, labels=formatted_labels, autopct=autopct_format, startangle=140, textprops={'fontsize': 9})
+                ax1.axis('equal')
+                ax1.legend(portfolio_df['Ticker'], title="Tickers", bbox_to_anchor=(1, 0.5), loc="center left", fontsize=9)
+            else:
+                sns.barplot(data=portfolio_df.sort_values('Allocation %', ascending=False), x='Ticker', y='Allocation %', palette='pastel', ax=ax1)
+                ax1.set_ylabel('Allocation (%)')
+                ax1.set_title('Portfolio Allocation by Ticker')
+
+            st.pyplot(fig1)
+
+            # --- Portfolio vs. Market Performance ---
+            st.subheader('Portfolio Performance vs. S&P 500')
+
+            portfolio_returns = pd.DataFrame()
+            for ticker in tickers:
+                try:
+                    col_name = f"{ticker}_Close"
+                    if col_name in data.columns:
+                        portfolio_returns[ticker] = data[col_name].pct_change()
+                except:
+                    continue
+
+            weighted_returns = (portfolio_returns * (portfolio_df.set_index('Ticker')['Allocation %'] / 100)).sum(axis=1)
+            cumulative_returns = (1 + weighted_returns).cumprod()
+
+            sp500 = yf.download(SP500_TICKER, start=START_DATE, end=END_DATE, auto_adjust=True)
+            sp500_returns = sp500['Close'].pct_change()
+            sp500_cumulative = (1 + sp500_returns).cumprod()
+
+            fig2, ax2 = plt.subplots(figsize=(12, 6))
+            ax2.plot(cumulative_returns.index, cumulative_returns.values, label='Your Portfolio', linewidth=2)
+            ax2.plot(sp500_cumulative.index, sp500_cumulative.values, label='S&P 500', linewidth=2)
+            ax2.set_ylabel('Growth of $1')
+            ax2.set_title('Cumulative Return Since 2022')
+            ax2.legend()
+            st.pyplot(fig2)
+
+            # --- Risk Metrics Calculation ---
+            st.subheader('Portfolio Risk Metrics')
+
+            volatility = weighted_returns.std() * np.sqrt(252)
+            sharpe = ((weighted_returns.mean() * 252) - RISK_FREE_RATE) / volatility
+
+            aligned = pd.concat([weighted_returns, sp500_returns], axis=1).dropna()
+            aligned.columns = ['Portfolio', 'S&P 500']
+            beta = aligned.cov().iloc[0, 1] / aligned['S&P 500'].var()
+
+            rolling_max = cumulative_returns.cummax()
+            drawdown = cumulative_returns / rolling_max - 1
+            max_drawdown = drawdown.min()
+
+            st.markdown(f"""
+            - **Portfolio Volatility (Annualized)**: `{volatility:.2%}`
+            - **Sharpe Ratio (Risk-Free Rate 3%)**: `{sharpe:.2f}`
+            - **Beta (vs. S&P 500)**: `{beta:.2f}`
+            - **Maximum Drawdown**: `{max_drawdown:.2%}`
+            """)
+
+            # --- Asset Correlation Matrix ---
+            st.subheader('Correlation Heatmap')
+            fig3, ax3 = plt.subplots(figsize=(12, 10))
+            sns.heatmap(portfolio_returns.corr(), annot=True, fmt='.2f', cmap='coolwarm', center=0, annot_kws={'size': 7}, ax=ax3)
+            ax3.set_title('Correlation Between Assets')
+            st.pyplot(fig3)
+
+            # --- Export Summary ---
+            st.subheader('Download Summary Report')
+            report = portfolio_df[['Ticker', 'Shares', 'Current Price', 'Market Value', 'Allocation %']]
+            st.download_button(
+                label="Download Portfolio Report (CSV)",
+                data=report.to_csv(index=False),
+                file_name='portfolio_summary.csv',
+                mime='text/csv'
+            )
+
     except Exception as e:
         st.error(f"An error occurred: {e}")
         st.warning("Please check your CSV file format and try again.")
 
 else:
     st.info('👈 Upload a CSV file to get started!')
-
-
-import yfinance as yf
-print(yf.download('AAPL', period='5d'))
