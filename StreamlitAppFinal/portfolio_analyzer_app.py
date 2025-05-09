@@ -31,6 +31,13 @@ Upload a CSV file with your portfolio to analyze:
 We'll compute allocations, performance, and risk metrics.
 """)
 
+# --- Example Portfolio Downloads ---
+with st.sidebar.expander("Need a sample file?"):
+    st.markdown("Download ready-to-use example portfolios:") # Provides the user with example portfolios
+    st.markdown("🔹 [With Purchase Price](https://nd4-my.sharepoint.com/:x:/g/personal/phood_nd_edu/EVoFtlq33cNIoWQQQInbAWEBsIyOXWq6OOn-zuM4Xxtd1w?e=r9zNeL)")
+    st.markdown("🔹 [Without Purchase Price](https://nd4-my.sharepoint.com/:x:/g/personal/phood_nd_edu/Efvj1CE5HfpMsPZ6Uypm_FYBqJpKsvDCFl8SKsQZwZsV3g?e=r7KA1f)")
+    st.caption("Use these to test features like gain/loss calculations and chart visualizations.")
+
 # --- Sidebar Inputs ---
 st.sidebar.header('Upload Your Portfolio CSV')
 uploaded_file = st.sidebar.file_uploader("Choose a CSV file", type=["csv"])
